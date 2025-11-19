@@ -1,14 +1,12 @@
 using Godot;
 using System;
 
-public partial class Player : CharacterBody2D
+public partial class Player : Character
 {
-    
-    public int Speed {get; private set;} = 300;
-    public int Health {get; private set;} = 100;
-    public int Attack {get; private set;} = 10;
-    public int Defense {get; private set;} = 5;
-    public int Experience {get; private set;} = 0;
+    public Player() : base(new int[]{ 100, 100, 10, 5, 0 })
+    {
+    }
+
 
     public override void _Ready()
     {

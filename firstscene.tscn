@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b78a87xgr45vh"]
+[gd_scene load_steps=8 format=3 uid="uid://b78a87xgr45vh"]
 
 [ext_resource type="PackedScene" uid="uid://o70v7si1focy" path="res://player.tscn" id="1_njhql"]
 [ext_resource type="PackedScene" uid="uid://dta5pfxe7gkuk" path="res://obstacle.tscn" id="2_sylqe"]
 [ext_resource type="PackedScene" uid="uid://cgw31n7cl3g4m" path="res://mob.tscn" id="3_u6acg"]
 [ext_resource type="PackedScene" uid="uid://tncj6nmxo7o3" path="res://wall.tscn" id="4_gllv3"]
+[ext_resource type="Script" path="res://EnemyController.cs" id="5_b2vq4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_32kv4"]
 size = Vector2(20, 844)
@@ -80,3 +81,7 @@ offset_bottom = 727.0
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="walls/ColorRect4/StaticBody2D"]
 position = Vector2(587, 9)
 shape = SubResource("RectangleShape2D_o0cih")
+
+[node name="Enemies" type="Node2D" parent="."]
+script = ExtResource("5_b2vq4")
+EnemyScene = ExtResource("3_u6acg")
