@@ -18,7 +18,7 @@ public partial class EnemyController : Node2D
 	private Area2D spawnAreaNode = null;
 	private CollisionPolygon2D spawnPolygon = null;
 	private Vector2[] spawnPolygonPoints = null;
-    
+	
 	private bool IsPointInsideSpawnArea(Vector2 globalPos)
 	{
 		if (spawnPolygon == null || spawnPolygonPoints == null)
