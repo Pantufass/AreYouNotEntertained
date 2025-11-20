@@ -1,18 +1,19 @@
 [gd_scene load_steps=7 format=3 uid="uid://o70v7si1focy"]
 
-[ext_resource type="Script" path="res://Player.cs" id="1_a1pjq"]
-[ext_resource type="PackedScene" uid="uid://beb01othfohyn" path="res://slash.tscn" id="2_42osb"]
+[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_a1pjq"]
+[ext_resource type="PackedScene" uid="uid://beb01othfohyn" path="res://Objects/slash.tscn" id="2_42osb"]
 [ext_resource type="Texture2D" uid="uid://ixuooced2nre" path="res://eRo5+L-3320792444.png" id="2_yc7mr"]
-[ext_resource type="Script" path="res://LookArea.cs" id="3_1rggt"]
+[ext_resource type="Script" path="res://Scripts/LookArea.cs" id="3_1rggt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eajv6"]
-radius = 18.0
-height = 112.0
+radius = 27.0
+height = 114.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_46rem"]
 radius = 286.007
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 2
 script = ExtResource("1_a1pjq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

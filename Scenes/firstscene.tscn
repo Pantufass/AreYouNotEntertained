@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://b78a87xgr45vh"]
 
-[ext_resource type="PackedScene" uid="uid://o70v7si1focy" path="res://player.tscn" id="1_njhql"]
-[ext_resource type="PackedScene" uid="uid://dta5pfxe7gkuk" path="res://obstacle.tscn" id="2_sylqe"]
-[ext_resource type="PackedScene" uid="uid://cgw31n7cl3g4m" path="res://mob.tscn" id="3_u6acg"]
-[ext_resource type="PackedScene" uid="uid://tncj6nmxo7o3" path="res://wall.tscn" id="4_gllv3"]
-[ext_resource type="Script" path="res://EnemyController.cs" id="5_b2vq4"]
+[ext_resource type="PackedScene" uid="uid://o70v7si1focy" path="res://Objects/player.tscn" id="1_awqne"]
+[ext_resource type="PackedScene" uid="uid://dta5pfxe7gkuk" path="res://Objects/obstacle.tscn" id="2_sib3h"]
+[ext_resource type="PackedScene" uid="uid://cgw31n7cl3g4m" path="res://Objects/mob.tscn" id="3_j8r64"]
+[ext_resource type="PackedScene" uid="uid://tncj6nmxo7o3" path="res://Objects/wall.tscn" id="4_lkx6f"]
+[ext_resource type="Script" path="res://Scripts/EnemyController.cs" id="5_8ecep"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_32kv4"]
 size = Vector2(20, 844)
@@ -23,18 +23,18 @@ offset_bottom = 1150.0
 [node name="TileMap" type="TileMap" parent="."]
 format = 2
 
-[node name="Player" parent="." instance=ExtResource("1_njhql")]
+[node name="Player" parent="." instance=ExtResource("1_awqne")]
 position = Vector2(531, 330)
 
-[node name="obstacle" parent="." instance=ExtResource("2_sylqe")]
+[node name="obstacle" parent="." instance=ExtResource("2_sib3h")]
 position = Vector2(300, 354)
 
-[node name="Mob" parent="." instance=ExtResource("3_u6acg")]
+[node name="Mob" parent="." instance=ExtResource("3_j8r64")]
 position = Vector2(816, 302)
 
 [node name="walls" type="Node2D" parent="."]
 
-[node name="ColorRect2" parent="walls" instance=ExtResource("4_gllv3")]
+[node name="ColorRect2" parent="walls" instance=ExtResource("4_lkx6f")]
 offset_left = -47.0
 offset_top = -126.0
 offset_right = 0.0
@@ -46,7 +46,7 @@ offset_bottom = 728.0
 position = Vector2(35, 425)
 shape = SubResource("RectangleShape2D_32kv4")
 
-[node name="ColorRect" parent="walls" instance=ExtResource("4_gllv3")]
+[node name="ColorRect" parent="walls" instance=ExtResource("4_lkx6f")]
 offset_left = -3.0
 offset_top = -125.0
 offset_right = 1165.0
@@ -58,7 +58,7 @@ offset_bottom = -85.0
 position = Vector2(591.5, 28)
 shape = SubResource("RectangleShape2D_o0cih")
 
-[node name="ColorRect3" parent="walls" instance=ExtResource("4_gllv3")]
+[node name="ColorRect3" parent="walls" instance=ExtResource("4_lkx6f")]
 offset_left = 1152.0
 offset_top = -128.0
 offset_right = 1199.0
@@ -70,7 +70,7 @@ offset_bottom = 726.0
 position = Vector2(10, 420)
 shape = SubResource("RectangleShape2D_32kv4")
 
-[node name="ColorRect4" parent="walls" instance=ExtResource("4_gllv3")]
+[node name="ColorRect4" parent="walls" instance=ExtResource("4_lkx6f")]
 offset_left = -13.0
 offset_top = 687.0
 offset_right = 1155.0
@@ -83,5 +83,5 @@ position = Vector2(587, 9)
 shape = SubResource("RectangleShape2D_o0cih")
 
 [node name="Enemies" type="Node2D" parent="."]
-script = ExtResource("5_b2vq4")
-EnemyScene = ExtResource("3_u6acg")
+script = ExtResource("5_8ecep")
+EnemyScene = ExtResource("3_j8r64")

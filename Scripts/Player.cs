@@ -22,6 +22,6 @@ public partial class Player : Character
 
     public void CheckIfHurt()
     {
-       var enemies = GetOverlappingBodies();
+        // Placeholder for hurt logic
     }
 }
