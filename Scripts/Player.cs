@@ -23,7 +23,7 @@ public partial class Player : Character
     public static event Action<float> OnKill;
     public static event Action<int> OnLevelUp;
     public static event Action OnGameOver;
-    public Player() : base(new int[]{ 350, 10, 10, 5, 0 })
+    public Player() : base(new int[]{ 350, 100, 10, 5, 0 })
     {
         OnKill += GetExp;
         OnLevelUp += LevelUp;

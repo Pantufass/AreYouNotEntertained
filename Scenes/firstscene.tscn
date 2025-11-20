@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b78a87xgr45vh"]
+[gd_scene load_steps=7 format=3 uid="uid://b78a87xgr45vh"]
 
+[ext_resource type="Script" uid="uid://841tqk154rit" path="res://Scenes/CanvasLayer.cs" id="1_6bfcl"]
 [ext_resource type="PackedScene" uid="uid://o70v7si1focy" path="res://Objects/player.tscn" id="1_awqne"]
-[ext_resource type="Texture2D" uid="uid://dkakjcydoo6ej" path="res://Assets/arena.png" id="1_pakyl"]
+[ext_resource type="Texture2D" uid="uid://dvavku7dd5tv3" path="res://Assets/arena1.png" id="2_6x7by"]
 [ext_resource type="PackedScene" uid="uid://dta5pfxe7gkuk" path="res://Objects/obstacle.tscn" id="2_sib3h"]
 [ext_resource type="PackedScene" uid="uid://cgw31n7cl3g4m" path="res://Objects/mob.tscn" id="3_j8r64"]
 [ext_resource type="Script" uid="uid://bss7sbyd3cqsv" path="res://Scripts/EnemyController.cs" id="5_8ecep"]
@@ -9,26 +10,22 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="arena" type="Sprite2D" parent="."]
+z_index = -1
 position = Vector2(400, 400)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_pakyl")
+texture = ExtResource("2_6x7by")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="arena"]
+collision_layer = 5
+collision_mask = 5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="arena/StaticBody2D"]
 build_mode = 1
-polygon = PackedVector2Array(-20, -2073, -2356, -1788, -3699, -1389, -4660, -836, -5083, -421, -5417, -14, -5417, -14, -5702, 564, -5702, 1297, -5476, 1878, -4849, 2594, -3810, 3185, 3774, 3212, 4625, 2720, 5296, 2084, 5601, 1654, 5753, 983, 5538, 195, 4911, -602, 3658, -1355, 2234, -1811)
+polygon = PackedVector2Array(-100, -1354, -716, -1354, -1314, -1308, -2094, -1170, -2288, -986, -3114, -738, -3308, -802, -3786, -572, -4218, -298, -4428, -122, -4448, 108, -4704, 622, -4924, 722, -4722, 1146, -4448, 1136, -4172, 1578, -3904, 1834, -2922, 2266, -2158, 2312, -1386, 2634, 432, 2698, 948, 2442, 1334, 2470, 1812, 2542, 3346, 2084, 3520, 1834, 3732, 1596, 3880, 1568, 4108, 1614, 4476, 1320, 4660, 1018, 4578, 586, 4578, 226, 4292, -122, 3806, -472, 3650, -362, 2960, -738, 2942, -866, 2326, -1078, 1498, -1262, 974, -1326, 910, -1226, -82, -1262)
 
 [node name="Player" parent="." instance=ExtResource("1_awqne")]
 position = Vector2(531, 330)
 collision_mask = 3
-
-[node name="obstacle" parent="." instance=ExtResource("2_sib3h")]
-position = Vector2(300, 354)
-
-[node name="Mob" parent="." instance=ExtResource("3_j8r64")]
-visible = false
-position = Vector2(816, 302)
 
 [node name="Enemies" type="Node2D" parent="."]
 script = ExtResource("5_8ecep")
@@ -37,3 +34,19 @@ EnemyScene = ExtResource("3_j8r64")
 [node name="Timer" type="Timer" parent="Enemies"]
 wait_time = 10.0
 autostart = true
+
+[node name="Area2D" type="Area2D" parent="Enemies"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemies/Area2D"]
+polygon = PackedVector2Array(370, -231, -352, -226, -1142, 31, -1817, 477, -1983, 762, -1624, 1185, -646, 1557, 67, 1685, 926, 1598, 1684, 1515, 2217, 1221, 2598, 1028, 2608, 486, 2337, 266, 2180, 243, 1826, 17, 1546, -116, 912, -208)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("1_6bfcl")
+
+[node name="obstacle" parent="." instance=ExtResource("2_sib3h")]
+position = Vector2(300, 354)
+
+[node name="Mob" parent="." instance=ExtResource("3_j8r64")]
+position = Vector2(816, 302)
