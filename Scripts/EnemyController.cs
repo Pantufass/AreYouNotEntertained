@@ -18,9 +18,14 @@ public partial class EnemyController : Node2D
 	[Export]
 	public Vector2 SpawnArea = new Vector2(1200, 600);
 
+	[Export]
+	public double DifficultyIncreasePeriod = 10.0;
 	private double timer = 0.0;
+	private double difficultyTimer = 0.0;
 	private RandomNumberGenerator rng = new RandomNumberGenerator();
 	private Player player = null;
+
+	private int templateHp = 5;
 
 	public override void _Ready()
 	{
@@ -35,6 +40,18 @@ public partial class EnemyController : Node2D
 	public override void _Process(double delta)
 	{
 		timer += delta;
+		difficultyTimer += delta;
+		if (difficultyTimer >= DifficultyIncreasePeriod)
+		{
+			difficultyTimer = 0.0;
+			if (SpawnPeriod > 0.2)
+			{
+				SpawnPeriod -= 0.1;
+				templateHp *= 2;
+				GD.Print($"Increased difficulty");
+			}
+
+		}
 		if (timer >= SpawnPeriod)
 		{
 			timer = 0.0;
@@ -80,17 +97,18 @@ public partial class EnemyController : Node2D
 		}
 
 		var inst = EnemyScene.Instantiate();
-		if (inst is Node2D enemyNode)
+		GD.Print($"[EnemyController] instantiated enemy: {inst} & type {inst.GetType()}");
+		if (inst is EnemyCharacter enemy)
 		{
-			Node parentForEnemies = GetTree().CurrentScene ?? GetTree().Root;
-			parentForEnemies.AddChild(enemyNode);
+			enemy.SetTemplateHealth(templateHp);
+			AddChild(enemy);
 			if (player != null)
 			{
 				float angle = rng.RandfRange(0.0f, MathF.PI * 2.0f);
 				float dist = rng.RandfRange(MinSpawnDistance, MaxSpawnDistance);
 				var offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * dist;
-				enemyNode.GlobalPosition = player.GlobalPosition + offset;
-				GD.Print($"Spawned enemy at global pos {enemyNode.GlobalPosition} (dist={dist:F1})");
+				enemy.GlobalPosition = player.GlobalPosition + offset;
+				GD.Print($"Spawned enemy at global pos {enemy.GlobalPosition} (dist={dist:F1})");
 			}
 			else
 			{
@@ -98,8 +116,8 @@ public partial class EnemyController : Node2D
 				float halfY = SpawnArea.Y / 2.0f;
 				float rx = rng.RandfRange(-halfX, halfX);
 				float ry = rng.RandfRange(-halfY, halfY);
-				enemyNode.Position = new Vector2(rx, ry);
-				GD.Print($"Spawned enemy at pos {enemyNode.Position}");
+				enemy.Position = new Vector2(rx, ry);
+				GD.Print($"Spawned enemy at pos {enemy.Position}");
 			}
 		}
 	}

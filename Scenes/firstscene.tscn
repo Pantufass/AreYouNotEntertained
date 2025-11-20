@@ -31,6 +31,9 @@ visible = false
 position = Vector2(816, 302)
 
 [node name="Enemies" type="Node2D" parent="."]
-visible = false
 script = ExtResource("5_8ecep")
 EnemyScene = ExtResource("3_j8r64")
+
+[node name="Timer" type="Timer" parent="Enemies"]
+wait_time = 10.0
+autostart = true

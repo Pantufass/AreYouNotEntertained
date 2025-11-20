@@ -4,6 +4,7 @@ using System;
 public partial class EnemyCharacter : Character
 {
     private static Player player = null;
+
     public override void _Ready()
     {
         if (player == null)
@@ -31,6 +32,11 @@ public partial class EnemyCharacter : Character
         }
     }
 
+    public void SetTemplateHealth(int hp)
+    {
+        Health = hp;
+    }
+    
     private void OnHitBodyEntered(Node body)
     {
         if (body is Player p)

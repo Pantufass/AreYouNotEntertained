@@ -3,8 +3,9 @@ using System;
 
 public partial class LookArea : Area2D
 {
-    public override void _Process(double delta)
+    public void OnSlash()
     {
+      GD.Print("LookArea detected slash!");
       var enemies = GetOverlappingBodies();
       foreach (var enemy in enemies)
       {

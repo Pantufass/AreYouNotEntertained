@@ -11,13 +11,15 @@ public partial class Slash : Area2D
   [Export]
   public bool StartVisible = false;
 
-    [Export]
+  [Export]
   public Player player;
   private CollisionShape2D collisionShape = null;
   private double timer = 0.0;
   private HashSet<EnemyCharacter> hitEnemies = new HashSet<EnemyCharacter>();
   private bool previousVisible = false;
 
+  private LookArea FocusArea;
+  private event Action TriggerSlash;
   public override void _Ready()
   {
     if(this.player == null)
@@ -27,6 +29,12 @@ public partial class Slash : Area2D
         {
           this.player = player;
         }
+        if (parentNode != null && parentNode is LookArea lookArea)
+        {
+          FocusArea = lookArea;
+          TriggerSlash += FocusArea.OnSlash;
+        }
+
     }
 
     GD.Print($"Slash ready, player: {player}");
@@ -51,9 +59,13 @@ public partial class Slash : Area2D
 
     if (shouldBeVisible != Visible)
     {
+      GD.Print(TriggerSlash);
+      TriggerSlash?.Invoke();
       Visible = shouldBeVisible;
       if (collisionShape != null)
+      {
         collisionShape.Disabled = !shouldBeVisible;
+      }
     }
 
     if (shouldBeVisible && !previousVisible)
@@ -76,4 +88,5 @@ public partial class Slash : Area2D
       }
     }
   }
+
 }
