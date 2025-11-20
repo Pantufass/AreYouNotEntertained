@@ -22,6 +22,7 @@ public partial class Player : Character
     };
     public static event Action<float> OnKill;
     public static event Action<int> OnLevelUp;
+    public static event Action OnGameOver;
     public Player() : base(new int[]{ 350, 10, 10, 5, 0 })
     {
         OnKill += GetExp;
@@ -46,7 +47,8 @@ public partial class Player : Character
         if (Health <= 0)
         {
             GD.Print("[Player] died (QueueFree)");
-            //Game Over
+            OnGameOver?.Invoke();
+            GetTree().Paused = true;
         }
     }
 

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhwnrqkiqa1qr"]
+
+[ext_resource type="Script" uid="uid://841tqk154rit" path="res://Scenes/CanvasLayer.cs" id="1_75aqd"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_75aqd")
+
+[node name="gameover" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(1, 0, 0.0823529, 0.196078)
+
+[node name="startscreen" type="ColorRect" parent="."]
+offset_right = 1916.0
+offset_bottom = 1080.0
