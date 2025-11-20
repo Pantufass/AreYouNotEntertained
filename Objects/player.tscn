@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://o70v7si1focy"]
 
-[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_a1pjq"]
+[ext_resource type="Script" uid="uid://dr8l2p0v7xdwb" path="res://Scripts/Player.cs" id="1_a1pjq"]
 [ext_resource type="PackedScene" uid="uid://beb01othfohyn" path="res://Objects/slash.tscn" id="2_42osb"]
-[ext_resource type="Texture2D" uid="uid://ixuooced2nre" path="res://eRo5+L-3320792444.png" id="2_yc7mr"]
-[ext_resource type="Script" path="res://Scripts/LookArea.cs" id="3_1rggt"]
+[ext_resource type="Texture2D" uid="uid://6110keshmkyr" path="res://Assets/MainCharAni/MainChar_ani_.png" id="2_hpnyc"]
+[ext_resource type="Script" uid="uid://fysbryoguxym" path="res://Scripts/LookArea.cs" id="3_1rggt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eajv6"]
 radius = 27.0
@@ -22,9 +22,11 @@ shape = SubResource("CapsuleShape2D_eajv6")
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(8, -25)
-scale = Vector2(0.119, 0.159)
-texture = ExtResource("2_yc7mr")
+position = Vector2(11, -10)
+scale = Vector2(0.5, 0.668)
+texture = ExtResource("2_hpnyc")
+hframes = 7
+vframes = 4
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -38,3 +40,5 @@ shape = SubResource("CircleShape2D_46rem")
 
 [node name="slash" parent="LookArea" node_paths=PackedStringArray("player") instance=ExtResource("2_42osb")]
 player = NodePath("../..")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

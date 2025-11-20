@@ -3,7 +3,7 @@ using System;
 
 public partial class Player : Character
 {
-    public Player() : base(new int[]{ 100, 100, 10, 5, 0 })
+    public Player() : base(new int[]{ 350, 10, 10, 5, 0 })
     {
     }
 
@@ -14,14 +14,20 @@ public partial class Player : Character
     }
     public override void _Process(double delta)
     {
-        CheckIfHurt();
         var input = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
         Velocity = input * Speed;
         MoveAndSlide();
     }
 
-    public void CheckIfHurt()
+    public void TakeDamage(int amount)
     {
-        // Placeholder for hurt logic
+        Health -= amount;
+        GD.Print($"[Player] took {amount} damage, health now {Health}");
+        if (Health <= 0)
+        {
+            GD.Print("[Player] died (QueueFree)");
+            //Game Over
+        }
     }
+
 }

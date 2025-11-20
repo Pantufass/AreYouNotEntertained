@@ -1,87 +1,36 @@
-[gd_scene load_steps=8 format=3 uid="uid://b78a87xgr45vh"]
+[gd_scene load_steps=6 format=3 uid="uid://b78a87xgr45vh"]
 
 [ext_resource type="PackedScene" uid="uid://o70v7si1focy" path="res://Objects/player.tscn" id="1_awqne"]
+[ext_resource type="Texture2D" uid="uid://dkakjcydoo6ej" path="res://Assets/arena.png" id="1_pakyl"]
 [ext_resource type="PackedScene" uid="uid://dta5pfxe7gkuk" path="res://Objects/obstacle.tscn" id="2_sib3h"]
 [ext_resource type="PackedScene" uid="uid://cgw31n7cl3g4m" path="res://Objects/mob.tscn" id="3_j8r64"]
-[ext_resource type="PackedScene" uid="uid://tncj6nmxo7o3" path="res://Objects/wall.tscn" id="4_lkx6f"]
-[ext_resource type="Script" path="res://Scripts/EnemyController.cs" id="5_8ecep"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_32kv4"]
-size = Vector2(20, 844)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o0cih"]
-size = Vector2(1153, 17)
+[ext_resource type="Script" uid="uid://bss7sbyd3cqsv" path="res://Scripts/EnemyController.cs" id="5_8ecep"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -584.0
-offset_top = -371.0
-offset_right = 1748.0
-offset_bottom = 1150.0
+[node name="arena" type="Sprite2D" parent="."]
+position = Vector2(400, 400)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_pakyl")
 
-[node name="TileMap" type="TileMap" parent="."]
-format = 2
+[node name="StaticBody2D" type="StaticBody2D" parent="arena"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="arena/StaticBody2D"]
+build_mode = 1
+polygon = PackedVector2Array(-20, -2073, -2356, -1788, -3699, -1389, -4660, -836, -5083, -421, -5417, -14, -5417, -14, -5702, 564, -5702, 1297, -5476, 1878, -4849, 2594, -3810, 3185, 3774, 3212, 4625, 2720, 5296, 2084, 5601, 1654, 5753, 983, 5538, 195, 4911, -602, 3658, -1355, 2234, -1811)
 
 [node name="Player" parent="." instance=ExtResource("1_awqne")]
 position = Vector2(531, 330)
+collision_mask = 3
 
 [node name="obstacle" parent="." instance=ExtResource("2_sib3h")]
 position = Vector2(300, 354)
 
 [node name="Mob" parent="." instance=ExtResource("3_j8r64")]
+visible = false
 position = Vector2(816, 302)
 
-[node name="walls" type="Node2D" parent="."]
-
-[node name="ColorRect2" parent="walls" instance=ExtResource("4_lkx6f")]
-offset_left = -47.0
-offset_top = -126.0
-offset_right = 0.0
-offset_bottom = 728.0
-
-[node name="StaticBody2D" type="StaticBody2D" parent="walls/ColorRect2"]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls/ColorRect2/StaticBody2D"]
-position = Vector2(35, 425)
-shape = SubResource("RectangleShape2D_32kv4")
-
-[node name="ColorRect" parent="walls" instance=ExtResource("4_lkx6f")]
-offset_left = -3.0
-offset_top = -125.0
-offset_right = 1165.0
-offset_bottom = -85.0
-
-[node name="StaticBody2D" type="StaticBody2D" parent="walls/ColorRect"]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls/ColorRect/StaticBody2D"]
-position = Vector2(591.5, 28)
-shape = SubResource("RectangleShape2D_o0cih")
-
-[node name="ColorRect3" parent="walls" instance=ExtResource("4_lkx6f")]
-offset_left = 1152.0
-offset_top = -128.0
-offset_right = 1199.0
-offset_bottom = 726.0
-
-[node name="StaticBody2D" type="StaticBody2D" parent="walls/ColorRect3"]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls/ColorRect3/StaticBody2D"]
-position = Vector2(10, 420)
-shape = SubResource("RectangleShape2D_32kv4")
-
-[node name="ColorRect4" parent="walls" instance=ExtResource("4_lkx6f")]
-offset_left = -13.0
-offset_top = 687.0
-offset_right = 1155.0
-offset_bottom = 727.0
-
-[node name="StaticBody2D" type="StaticBody2D" parent="walls/ColorRect4"]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls/ColorRect4/StaticBody2D"]
-position = Vector2(587, 9)
-shape = SubResource("RectangleShape2D_o0cih")
-
 [node name="Enemies" type="Node2D" parent="."]
+visible = false
 script = ExtResource("5_8ecep")
 EnemyScene = ExtResource("3_j8r64")
