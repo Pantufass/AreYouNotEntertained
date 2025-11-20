@@ -7,7 +7,7 @@ public partial class Slash : Area2D
   [Export]
   public double Period = 2.0;
   [Export]
-  public double VisibleTime = 0.25;
+  public double VisibleTime = 0.2;
   [Export]
   public bool StartVisible = false;
 
@@ -34,6 +34,13 @@ public partial class Slash : Area2D
       FocusArea = lookArea;
       TriggerSlash += FocusArea.OnSlash;
     }
+
+    if(this.player == null || this.FocusArea == null)
+    {
+        throw new Exception("Slash: player or FocusArea is null in _Ready()");
+    }
+
+    Period = this.player.AttackSpeed;
 
     collisionShape = GetNodeOrNull<CollisionShape2D>("CollisionShape2D");
 

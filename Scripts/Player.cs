@@ -3,6 +3,8 @@ using System;
 
 public partial class Player : Character
 {
+    public int Score {get; private set;} = 0;
+    public double AttackSpeed {get; private set;} = 2.0;
     public Player() : base(new int[]{ 350, 10, 10, 5, 0 })
     {
     }
