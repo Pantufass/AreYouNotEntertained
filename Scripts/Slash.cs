@@ -18,26 +18,23 @@ public partial class Slash : Area2D
   private HashSet<EnemyCharacter> hitEnemies = new HashSet<EnemyCharacter>();
   private bool previousVisible = false;
 
+[Export]
   private LookArea FocusArea;
   private event Action TriggerSlash;
   public override void _Ready()
   {
-    if(this.player == null)
+    var parentNode = GetParent();
+    GD.Print($"Parent node: {parentNode} & its parent: {parentNode?.GetParent()}");
+    if (parentNode != null && parentNode.GetParent() is Player player)
     {
-        var parentNode = GetParent();
-        if (parentNode != null && parentNode.GetParent() is Player player)
-        {
-          this.player = player;
-        }
-        if (parentNode != null && parentNode is LookArea lookArea)
-        {
-          FocusArea = lookArea;
-          TriggerSlash += FocusArea.OnSlash;
-        }
-
+      this.player = player;
+    }
+    if (parentNode != null && parentNode is LookArea lookArea)
+    {
+      FocusArea = lookArea;
+      TriggerSlash += FocusArea.OnSlash;
     }
 
-    GD.Print($"Slash ready, player: {player}");
     collisionShape = GetNodeOrNull<CollisionShape2D>("CollisionShape2D");
 
     if (VisibleTime > Period)

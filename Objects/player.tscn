@@ -38,7 +38,8 @@ script = ExtResource("3_1rggt")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LookArea"]
 shape = SubResource("CircleShape2D_46rem")
 
-[node name="slash" parent="LookArea" node_paths=PackedStringArray("player") instance=ExtResource("2_42osb")]
+[node name="slash" parent="LookArea" node_paths=PackedStringArray("player", "FocusArea") instance=ExtResource("2_42osb")]
 player = NodePath("../..")
+FocusArea = NodePath("..")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
