@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://o70v7si1focy"]
+[gd_scene load_steps=21 format=3 uid="uid://o70v7si1focy"]
 
 [ext_resource type="Script" uid="uid://dr8l2p0v7xdwb" path="res://Scripts/Player.cs" id="1_a1pjq"]
 [ext_resource type="PackedScene" uid="uid://beb01othfohyn" path="res://Objects/slash.tscn" id="2_42osb"]
 [ext_resource type="Texture2D" uid="uid://6110keshmkyr" path="res://Assets/MainCharAni/MainChar_ani_.png" id="2_hpnyc"]
 [ext_resource type="Script" uid="uid://fysbryoguxym" path="res://Scripts/LookArea.cs" id="3_1rggt"]
+[ext_resource type="Texture2D" uid="uid://45vgu4hchp3x" path="res://Assets/MainCharAni/MainChar_ani_(NoWeapon).png" id="5_x20fu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eajv6"]
 radius = 27.0
@@ -11,6 +12,103 @@ height = 114.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_46rem"]
 radius = 286.007
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x20fu"]
+atlas = ExtResource("5_x20fu")
+region = Rect2(0, 0, 260, 208)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ar0x"]
+atlas = ExtResource("5_x20fu")
+region = Rect2(260, 0, 260, 208)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slvmq"]
+atlas = ExtResource("5_x20fu")
+region = Rect2(520, 0, 260, 208)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ng3n2"]
+atlas = ExtResource("5_x20fu")
+region = Rect2(780, 0, 260, 208)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7am4"]
+atlas = ExtResource("5_x20fu")
+region = Rect2(1040, 0, 260, 208)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3n8j0"]
+atlas = ExtResource("5_x20fu")
+region = Rect2(1300, 0, 260, 208)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hyl1l"]
+atlas = ExtResource("5_x20fu")
+region = Rect2(1560, 0, 260, 208)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbav2"]
+atlas = ExtResource("5_x20fu")
+region = Rect2(0, 208, 260, 208)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ye7n"]
+atlas = ExtResource("5_x20fu")
+region = Rect2(260, 208, 260, 208)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxqss"]
+atlas = ExtResource("5_x20fu")
+region = Rect2(520, 208, 260, 208)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jlvs"]
+atlas = ExtResource("5_x20fu")
+region = Rect2(780, 208, 260, 208)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ht63"]
+atlas = ExtResource("5_x20fu")
+region = Rect2(1040, 208, 260, 208)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3n8j0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x20fu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ar0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slvmq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ng3n2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f7am4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3n8j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hyl1l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbav2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ye7n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxqss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jlvs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ht63")
+}],
+"loop": true,
+"name": &"move",
+"speed": 20.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2
@@ -22,6 +120,7 @@ shape = SubResource("CapsuleShape2D_eajv6")
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(11, -10)
 scale = Vector2(0.5, 0.668)
 texture = ExtResource("2_hpnyc")
@@ -38,8 +137,12 @@ script = ExtResource("3_1rggt")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LookArea"]
 shape = SubResource("CircleShape2D_46rem")
 
-[node name="slash" parent="LookArea" node_paths=PackedStringArray("player", "FocusArea") instance=ExtResource("2_42osb")]
+[node name="slash" parent="LookArea" node_paths=PackedStringArray("player") instance=ExtResource("2_42osb")]
 player = NodePath("../..")
-FocusArea = NodePath("..")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(15, -5)
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_3n8j0")
+animation = &"idle"
+autoplay = "idle"
