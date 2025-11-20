@@ -29,16 +29,16 @@ public partial class Player : Character
         OnLevelUp += LevelUp;
     }
 
-    public override void _Ready()
-    {
-        
-    }
-    public override void _Process(double delta)
-    {
-        var input = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-        Velocity = input * Speed;
-        MoveAndSlide();
-    }
+	public override void _Ready()
+	{
+		
+	}
+	public override void _Process(double delta)
+	{
+		var input = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+		Velocity = input * Speed;
+		MoveAndSlide();
+	}
 
     public void TakeDamage(float amount)
     {
@@ -52,24 +52,24 @@ public partial class Player : Character
         }
     }
 
-    public static void OnKillEnemy(float exp)
-    {
-        OnKill?.Invoke(exp);
-    }
-    public void GetExp(float exp)
-    {
-        Score += 1;
-        Experience += exp;
-        GD.Print($"[Player] gained {exp} experience, total now {Experience}");
-        if(LevelProgression.ContainsKey(Level + 1) && Experience >= LevelProgression[Level + 1])
-        {
-            OnLevelUp?.Invoke(Level);
-        }
-    }
+	public static void OnKillEnemy(float exp)
+	{
+		OnKill?.Invoke(exp);
+	}
+	public void GetExp(float exp)
+	{
+		Score += 1;
+		Experience += exp;
+		GD.Print($"[Player] gained {exp} experience, total now {Experience}");
+		if(LevelProgression.ContainsKey(Level + 1) && Experience >= LevelProgression[Level + 1])
+		{
+			OnLevelUp?.Invoke(Level);
+		}
+	}
 
-    public void LevelUp(int exp)
-    {
-        Level += 1;
-        GD.Print($"[Player] leveled up to level {Level}!");
-    }
+	public void LevelUp(int exp)
+	{
+		Level += 1;
+		GD.Print($"[Player] leveled up to level {Level}!");
+	}
 }
