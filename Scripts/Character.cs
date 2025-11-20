@@ -4,11 +4,11 @@ using System;
 public partial class Character : CharacterBody2D
 {
     
-    public int Speed {get; protected set;} = 100;
-    public int Health {get; protected set;} = 1;
-    public int Attack {get; protected set;} = 1;
-    public int Defense {get; protected set;} = 1;
-    public int Experience {get; protected set;} = 0;
+    public float Speed {get; protected set;} = 100f;
+    public float Health {get; protected set;} = 1f;
+    public float Attack {get; protected set;} = 1f;
+    public float Defense {get; protected set;} = 1f;
+    public float Experience {get; protected set;} = 1f;
 
     public Character(int[] stats)
     {

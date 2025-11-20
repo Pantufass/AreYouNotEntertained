@@ -36,7 +36,7 @@ public partial class EnemyCharacter : Character
     {
         Health = hp;
     }
-    
+
     private void OnHitBodyEntered(Node body)
     {
         if (body is Player p)
@@ -51,13 +51,14 @@ public partial class EnemyCharacter : Character
         MoveAndSlide();
     }   
 
-    public void GetHit(int damage)
+    public void GetHit(float damage)
     {
         GD.Print($"Enemy hit for {damage} damage!");
         Health -= damage;
         if (Health <= 0)
         {
             QueueFree();
+            Player.OnKillEnemy(Experience);
         }
     }
 }
