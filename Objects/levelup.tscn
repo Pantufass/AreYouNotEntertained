@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbu5r6ecvm3rg"]
+
+[ext_resource type="Texture2D" uid="uid://dc7ytloniusoi" path="res://Assets/image_processing20200511-14390-ov0bzi.png" id="1_me1x4"]
+
+[node name="levelup" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1926.0
+offset_bottom = 1081.0
+color = Color(0.329412, 0.329412, 0.329412, 0.184314)
+
+[node name="up" type="TextureRect" parent="."]
+offset_left = 854.0
+offset_top = 788.0
+offset_right = 1657.0
+offset_bottom = 1588.0
+rotation = 3.14159
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_me1x4")
+
+[node name="down" type="TextureRect" parent="."]
+offset_left = 1142.0
+offset_top = 298.0
+offset_right = 1945.0
+offset_bottom = 1098.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_me1x4")

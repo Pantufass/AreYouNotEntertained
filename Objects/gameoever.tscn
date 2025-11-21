@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhwnrqkiqa1qr"]
+
+[ext_resource type="Script" uid="uid://841tqk154rit" path="res://Scripts/CanvasLayer.cs" id="1_75aqd"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_75aqd")
+
+[node name="gameover" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(1, 0, 0.0823529, 0.196078)
+
+[node name="Button" type="Button" parent="."]
+offset_left = 832.0
+offset_top = 738.0
+offset_right = 1058.0
+offset_bottom = 869.0
+theme_override_font_sizes/font_size = 26
+text = "RESTART"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 794.0
+offset_top = 403.0
+offset_right = 1090.0
+offset_bottom = 542.0
+theme_override_font_sizes/normal_font_size = 50
+text = "GAME OVER"

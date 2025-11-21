@@ -92,6 +92,8 @@ public partial class EnemyController : Node2D
 
 	public override void _Process(double delta)
 	{
+		if (GameState.IsGameOver)
+			return;
 		timer += delta;
 		difficultyTimer += delta;
 		if (difficultyTimer >= DifficultyIncreasePeriod)
@@ -100,7 +102,7 @@ public partial class EnemyController : Node2D
 			if (SpawnPeriod > 0.2)
 			{
 				SpawnPeriod -= 0.1;
-				templateHp *= 2;
+				templateHp += 10;
 				GD.Print($"Increased difficulty");
 			}
 

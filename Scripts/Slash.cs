@@ -62,6 +62,8 @@ public partial class Slash : Area2D
 
 	public override void _Process(double delta)
 	{
+		if (GameState.IsGameOver)
+			return;
 		timer += delta;
 		var t = timer % Period;
 		bool shouldBeVisible = t < VisibleTime;

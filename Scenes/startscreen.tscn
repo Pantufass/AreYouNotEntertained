@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://d32o3s7gy5bn7"]
+[gd_scene load_steps=2 format=3 uid="uid://d32o3s7gy5bn7"]
+
+[ext_resource type="Script" path="res://Scripts/StartScreen.cs" id="1_a8mag"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -9,13 +11,29 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 0
+layout_mode = 1
 offset_right = 1920.0
-offset_bottom = 1088.0
+offset_bottom = 1080.0
+script = ExtResource("1_a8mag")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "START GAME"
+
+[node name="Button2" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "QUIT GAME"
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2

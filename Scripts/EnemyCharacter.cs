@@ -7,6 +7,8 @@ public partial class EnemyCharacter : Character
 
 	public override void _Ready()
 	{
+		// prefer the global Player.Instance if available (keeps references valid across scene reloads)
+		player = Player.Instance ?? player;
 		if (player == null)
 		{
 			var root = GetTree().CurrentScene ?? GetTree().Root;
@@ -46,7 +48,14 @@ public partial class EnemyCharacter : Character
 	}
 	public override void _Process(double delta)
 	{
-		var direction = (player.GlobalPosition - GlobalPosition).Normalized();  
+		if (GameState.IsGameOver)
+			return;
+
+		var currentPlayer = Player.Instance ?? player;
+		if (currentPlayer == null)
+			return;
+
+		var direction = (currentPlayer.GlobalPosition - GlobalPosition).Normalized();
 		Velocity = direction * Speed;
 		MoveAndSlide();
 	}   
