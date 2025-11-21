@@ -4,37 +4,45 @@ using System.Collections.Generic;
 
 public partial class Player : Character
 {
+	private static AnimatedSprite2D animation = null;
+	
+	public int Score {get; private set;} = 0;
+	public double AttackSpeed {get; private set;} = 2.0;
+	public int Level {get; private set;} = 1;
+	public Dictionary<int,float> LevelProgression {get;} = new Dictionary<int,float>()
+	{
+		{1, 0f},
+		{2, 10f},
+		{3, 25f},
+		{4, 45f},
+		{5, 70f},
+		{6, 100f},
+		{7, 130f},
+		{8, 175f},
+		{9, 220f},
+		{10, 270f}
+	};
+	public static event Action<float> OnKill;
+	public static event Action<int> OnLevelUp;
+	public static event Action OnGameOver;
     public static Player Instance { get; private set; }
+	public Player() : base(new int[]{ 350, 10, 10, 5, 0 })
+	{
+		OnKill += GetExp;
+		OnLevelUp += LevelUp;
+	}
 
-    public int Score {get; private set;} = 0;
-    public double AttackSpeed {get; private set;} = 2.0;
-    public int Level {get; private set;} = 1;
-    public Dictionary<int,float> LevelProgression {get;} = new Dictionary<int,float>()
-    {
-        {1, 0f},
-        {2, 6f},
-        {3, 12f},
-        {4, 20f},
-        {5, 30f},
-        {6, 50f},
-        {7, 75f},
-        {8, 100f},
-        {9, 140f},
-        {10, 200f}
-    };
-    public static event Action<float> OnKill;
-    public static event Action<int> OnLevelUp;
-    public static event Action OnGameOver;
-    public Player() : base(new int[]{ 350, 10, 10, 5, 0 })
-    {
-        OnKill += GetExp;
-        OnLevelUp += LevelUp;
-    }
 
 	public override void _Ready()
 	{
         Instance = this;
-		
+		if (animation == null)
+		{
+			var root = GetTree().CurrentScene ?? GetTree().Root;
+			animation = root.GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
+			
+			//animation.play("Move");
+		}
 	}
 
     public override void _ExitTree()
@@ -43,6 +51,8 @@ public partial class Player : Character
         OnKill -= GetExp;
         OnLevelUp -= LevelUp;
     }
+		
+	
 	public override void _Process(double delta)
 	{
         if (GameState.IsGameOver)
