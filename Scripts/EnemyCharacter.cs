@@ -5,6 +5,9 @@ public partial class EnemyCharacter : Character
 {
 	private static Player player = null;
 	private AnimatedSprite2D animation = null;
+	private Color originalModulate = new Color(1,1,1,1);
+	[Export]
+	public double HitFlashDuration = 0.05;
 
 	public override void _Ready()
 	{
@@ -35,6 +38,10 @@ public partial class EnemyCharacter : Character
 		}
 
 		animation = GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
+		if (animation != null)
+		{
+			originalModulate = animation.Modulate;
+		}
 	}
 
 	public void SetTemplateHealth(int hp)
@@ -77,6 +84,17 @@ public partial class EnemyCharacter : Character
 	{
 		GD.Print($"Enemy hit for {damage} damage!");
 		Health -= damage;
+		// flash red briefly to indicate hit
+		if (animation != null)
+		{
+			animation.Modulate = new Color(1, 0.2f, 0.2f, 1);
+			// reset after short duration
+			GetTree().CreateTimer(HitFlashDuration).Timeout += () =>
+			{
+				if (animation != null)
+					animation.Modulate = originalModulate;
+			};
+		}
 		if (Health <= 0)
 		{
 			QueueFree();

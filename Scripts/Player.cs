@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class Player : Character
 {
-	private static AnimatedSprite2D animation = null;
+    private AnimatedSprite2D animation = null;
 
     // attack animation lock: prevent animation changes for this duration after attacking
     private bool isAttackLocked = false;
@@ -41,11 +41,8 @@ public partial class Player : Character
 	public override void _Ready()
 	{
         Instance = this;
-		if (animation == null)
-		{
-			animation = GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
-			//animation.play("Move");
-		}
+        // always get the AnimatedSprite2D for this instance (don't keep a stale static reference)
+        animation = GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
 	}
 
     public override void _ExitTree()

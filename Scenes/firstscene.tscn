@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://b78a87xgr45vh"]
+[gd_scene load_steps=8 format=3 uid="uid://b78a87xgr45vh"]
 
 [ext_resource type="PackedScene" uid="uid://o70v7si1focy" path="res://Objects/player.tscn" id="1_awqne"]
 [ext_resource type="Texture2D" uid="uid://dvavku7dd5tv3" path="res://Assets/arena1.png" id="2_6x7by"]
-[ext_resource type="PackedScene" uid="uid://dta5pfxe7gkuk" path="res://Objects/obstacle.tscn" id="2_sib3h"]
 [ext_resource type="PackedScene" uid="uid://cgw31n7cl3g4m" path="res://Objects/mob.tscn" id="3_j8r64"]
 [ext_resource type="Script" uid="uid://bss7sbyd3cqsv" path="res://Scripts/EnemyController.cs" id="5_8ecep"]
 [ext_resource type="PackedScene" uid="uid://bhwnrqkiqa1qr" path="res://Objects/gameoever.tscn" id="6_6bfcl"]
@@ -45,9 +44,6 @@ collision_mask = 0
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemies/Area2D"]
 position = Vector2(125, 110)
 polygon = PackedVector2Array(370, -231, -352, -226, -1142, 31, -1817, 477, -1983, 762, -1624, 1185, -646, 1557, 67, 1685, 926, 1598, 1684, 1515, 2217, 1221, 2598, 1028, 2608, 486, 2337, 266, 2180, 243, 1826, 17, 1546, -116, 912, -208)
-
-[node name="obstacle" parent="." instance=ExtResource("2_sib3h")]
-position = Vector2(300, 354)
 
 [node name="Mob" parent="." instance=ExtResource("3_j8r64")]
 position = Vector2(816, 302)
