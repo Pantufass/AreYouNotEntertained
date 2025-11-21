@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgw31n7cl3g4m"]
+[gd_scene load_steps=10 format=3 uid="uid://cgw31n7cl3g4m"]
 
 [ext_resource type="Script" uid="uid://ldx0ye6y1yal" path="res://Scripts/EnemyCharacter.cs" id="1_4mvy5"]
 [ext_resource type="Texture2D" uid="uid://cekyycrkpc6li" path="res://Assets/E1_Ani_.png" id="2_1tf6o"]
@@ -9,16 +9,46 @@ radius = 25.02
 [sub_resource type="CircleShape2D" id="CircleShape2D_k4lgo"]
 radius = 29.0172
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1tf6o"]
+atlas = ExtResource("2_1tf6o")
+region = Rect2(0, 172, 228, 172)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0gsq"]
+atlas = ExtResource("2_1tf6o")
+region = Rect2(228, 172, 228, 172)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_77kjk"]
+atlas = ExtResource("2_1tf6o")
+region = Rect2(456, 172, 228, 172)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wbxlq"]
+atlas = ExtResource("2_1tf6o")
+region = Rect2(684, 172, 228, 172)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ooyfi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1tf6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0gsq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_77kjk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wbxlq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Mob" type="CharacterBody2D"]
 collision_layer = 10
 collision_mask = 8
 script = ExtResource("1_4mvy5")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_1tf6o")
-hframes = 4
-vframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
@@ -29,3 +59,8 @@ shape = SubResource("CircleShape2D_r0gsq")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea"]
 position = Vector2(-7, -2)
 shape = SubResource("CircleShape2D_k4lgo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -10)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_ooyfi")

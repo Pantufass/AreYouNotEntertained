@@ -5,6 +5,11 @@ using System.Collections.Generic;
 public partial class Player : Character
 {
 	private static AnimatedSprite2D animation = null;
+
+    // attack animation lock: prevent animation changes for this duration after attacking
+    private bool isAttackLocked = false;
+    private double attackLockTimer = 0.0;
+    public double attackLockDuration = 0.2;
 	
 	public int Score {get; private set;} = 0;
 	public double AttackSpeed {get; private set;} = 2.0;
@@ -38,9 +43,7 @@ public partial class Player : Character
         Instance = this;
 		if (animation == null)
 		{
-			var root = GetTree().CurrentScene ?? GetTree().Root;
-			animation = root.GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
-			
+			animation = GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
 			//animation.play("Move");
 		}
 	}
@@ -55,13 +58,47 @@ public partial class Player : Character
 	
 	public override void _Process(double delta)
 	{
-        if (GameState.IsGameOver)
-            return;
+        if (GameState.IsGameOver) return;
+
 
         var input = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+        if (isAttackLocked)
+        {
+            attackLockTimer -= delta;
+            if (attackLockTimer <= 0)
+            {
+                isAttackLocked = false;
+                attackLockTimer = 0.0;
+            }
+        }
+
+        if (!isAttackLocked)
+        {
+            if(input != Vector2.Zero)
+            {
+                if (animation != null && input.X != 0) animation.FlipH = input.X < 0;
+                animation.Play("move");
+            }
+            else
+            {
+                animation.Play("idle");
+            }
+        }
         Velocity = input * Speed;
         MoveAndSlide();
 	}
+
+    public void OnSlash(Vector2 direction)
+    {
+        GD.Print($"[Player] OnSlash called with direction {direction}");
+        if (animation != null && direction.X != 0){
+            animation.FlipH = direction.X < 0;
+        }
+        if(animation != null) animation.Play("attack");
+            
+        isAttackLocked = true;
+        attackLockTimer = attackLockDuration;
+    }
 
     public void TakeDamage(float amount)
     {

@@ -81,6 +81,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_0ad8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x20fu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ar0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slvmq")
+}],
+"loop": true,
+"name": &"attack_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ng3n2")
 }, {
 "duration": 1.0,
@@ -98,6 +115,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ng3n2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f7am4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3n8j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hyl1l")
+}],
+"loop": true,
+"name": &"idle_left",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_sbav2")
 }, {
 "duration": 1.0,
@@ -111,6 +145,23 @@ animations = [{
 }],
 "loop": true,
 "name": &"move",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbav2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ye7n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxqss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jlvs")
+}],
+"loop": true,
+"name": &"move_left",
 "speed": 20.0
 }]
 
@@ -149,6 +200,5 @@ player = NodePath("../..")
 position = Vector2(15, -5)
 scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_3n8j0")
-animation = &"move"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.431894

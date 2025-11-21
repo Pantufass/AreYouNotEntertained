@@ -4,6 +4,7 @@ using System;
 public partial class EnemyCharacter : Character
 {
 	private static Player player = null;
+	private AnimatedSprite2D animation = null;
 
 	public override void _Ready()
 	{
@@ -32,6 +33,8 @@ public partial class EnemyCharacter : Character
 		{
 			hit.BodyEntered += OnHitBodyEntered;
 		}
+
+		animation = GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
 	}
 
 	public void SetTemplateHealth(int hp)
@@ -58,6 +61,16 @@ public partial class EnemyCharacter : Character
 		var direction = (currentPlayer.GlobalPosition - GlobalPosition).Normalized();
 		Velocity = direction * Speed;
 		MoveAndSlide();
+
+		if (animation != null)
+		{
+			if (Velocity.X < 0)
+				animation.FlipH = true;
+			else if (Velocity.X > 0)
+				animation.FlipH = false;
+			if (!animation.IsPlaying())
+				animation.Play("default");
+		}
 	}   
 
 	public void GetHit(float damage)

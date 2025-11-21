@@ -25,6 +25,7 @@ public partial class Slash : Area2D
 	private LookArea FocusArea;
 
 	private event Action TriggerSlash;
+	private event Action<Vector2> ShowSlash;
 
 	public override void _Ready()
 	{
@@ -32,6 +33,8 @@ public partial class Slash : Area2D
 		if (parentNode != null && parentNode.GetParent() is Player player)
 		{
 			this.player = player;
+			ShowSlash += this.player.OnSlash;
+			this.player.attackLockDuration = VisibleTime;
 		}
 
 		if (parentNode != null && parentNode is LookArea lookArea)
@@ -70,7 +73,9 @@ public partial class Slash : Area2D
 
 		if (shouldBeVisible != Visible)
 		{
-			TriggerSlash?.Invoke();
+			FocusArea.OnSlash();
+			var dir = FocusArea.GetLookAtVector();
+			ShowSlash?.Invoke(dir.HasValue ? dir.Value : Vector2.Zero);
 			Visible = shouldBeVisible;
 			if (collisionShape != null)
 			{
